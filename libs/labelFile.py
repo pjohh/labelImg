@@ -63,7 +63,7 @@ class LabelFile(object):
         imageShape = img.shape
         writer = PascalVocWriter(imgFolderName, imgFileNameWithoutExt,\
                                  imageShape, localImgPath=imagePath)
-        bSave = False
+        bSave = True #False to block annotations without bounding boxes
         for shape in shapes:
             points = shape['points']
             label = shape['label']

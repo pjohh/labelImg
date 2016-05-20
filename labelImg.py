@@ -153,7 +153,7 @@ class MainWindow(QMainWindow, WindowMixin):
                 'Ctrl+S', 'save', u'Save labels to file', enabled=False)
         saveAs = action('&Save As', self.saveFileAs,
                 'Ctrl+Shift+S', 'save-as', u'Save labels to a different file',
-                enabled=False)
+                enabled=True)
         close = action('&Close', self.closeFile,
                 'Ctrl+W', 'close', u'Close current file')
         color1 = action('Box &Line Color', self.chooseColor1,
@@ -696,7 +696,8 @@ class MainWindow(QMainWindow, WindowMixin):
             self.canvas.loadPixmap(QPixmap.fromImage(image))
             if self.labelFile:
                 self.loadLabels(self.labelFile.shapes)
-            self.setClean()
+            #self.setClean()
+            self.actions.save.setEnabled(True) # enables annotations without bounding boxes
             self.canvas.setEnabled(True)
             self.adjustScale(initial=True)
             self.paintCanvas()
@@ -949,10 +950,10 @@ class MainWindow(QMainWindow, WindowMixin):
 
     # Message Dialogs. #
     def hasLabels(self):
-        if not self.itemsToShapes:
-            self.errorMessage(u'No objects labeled',
-                    u'You must label at least one object to save the file.')
-            return False
+        #if not self.itemsToShapes:
+        #    self.errorMessage(u'No objects labeled',
+        #            u'You must label at least one object to save the file.')
+        #    return False
         return True
 
     def mayContinue(self):
